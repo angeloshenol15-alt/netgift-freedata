@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NetGift — Claim Your Free 100GB</title>
+<!--
+  ANGELO — read this before you film:
+  This is page 1 of 3 ("the bait"). It links to 2-verify.html, which links to 3-reveal.html.
+  Keep all three files in the SAME folder and don't rename them, or the buttons will break.
+  The top dark strip is the honesty banner — every real visitor sees it immediately.
+  Replace the testimonial names / counter starting number below if you want, search for "EDIT:".
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0B1D3A; --blue:#1E5BFF; --blue-light:#EAF1FF;
+    --gold:#FFB400; --green:#1DB876; --paper:#F6F8FC;
+    --ink:#16181D; --coral:#FF5630; --line:#E3E9F5;
+    --radius:18px; --shadow:0 20px 40px -20px rgba(11,29,58,.25);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--paper); color:var(--navy);
+    font-family:'Inter',system-ui,sans-serif; line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  h1,h2,h3{font-family:'Plus Jakarta Sans',sans-serif; margin:0; letter-spacing:-0.02em;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  :focus-visible{outline:3px solid var(--blue); outline-offset:2px;}
+
+  /* ---------- Honesty banner ---------- */
+  .demo-bar{
+    position:sticky; top:0; z-index:100;
+    background:var(--ink); color:#fff;
+    font-family:'JetBrains Mono',monospace;
+    font-size:.78rem; font-weight:500;
+    padding:.6rem 1rem; text-align:center;
+    border-bottom:2px solid var(--coral);
+  }
+  .demo-bar strong{color:var(--coral); font-weight:700;}
+  .demo-bar a{text-decoration:underline; color:#fff; white-space:nowrap;}
+
+  /* ---------- Nav ---------- */
+  .nav{
+    max-width:1120px; margin:0 auto; padding:1.4rem 1.5rem .6rem;
+    display:flex; align-items:center; gap:.6rem;
+  }
+  .logo-mark{width:34px; height:34px; flex-shrink:0;}
+  .logo-text{font-weight:800; font-size:1.15rem;}
+  .logo-text span{color:var(--blue);}
+
+  /* ---------- Hero ---------- */
+  .hero{max-width:1120px; margin:0 auto; padding:2.4rem 1.5rem 3rem;
+    display:grid; grid-template-columns:1.1fr .9fr; gap:3rem; align-items:center;}
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:.4rem;
+    background:var(--blue-light); color:var(--blue); font-weight:700;
+    font-size:.8rem; padding:.4rem .8rem; border-radius:999px; margin-bottom:1.1rem;
+  }
+  .hero h1{font-size:clamp(2.1rem,4.2vw,3.2rem); font-weight:800; line-height:1.06;}
+  .hero h1 .accent{color:var(--blue);}
+  .hero p.sub{font-size:1.05rem; color:#3C4A66; margin:1rem 0 1.6rem; max-width:480px;}
+  .countdown{
+    display:inline-flex; align-items:center; gap:.6rem; background:#fff;
+    border:1px solid var(--line); border-radius:14px; padding:.7rem 1rem;
+    margin-bottom:1.4rem; box-shadow:var(--shadow); font-weight:700;
+  }
+  .countdown .dot{width:8px; height:8px; border-radius:50%; background:var(--coral); animation:pulse 1.4s infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+  .countdown span#timer{font-family:'JetBrains Mono',monospace; color:var(--coral); font-size:1.05rem;}
+
+  .cta-btn{
+    display:inline-flex; align-items:center; gap:.55rem;
+    background:var(--blue); color:#fff; font-weight:700; font-size:1.05rem;
+    padding:1rem 1.7rem; border-radius:14px; border:none; cursor:pointer;
+    box-shadow:0 14px 28px -10px rgba(30,91,255,.55); text-decoration:none;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .cta-btn:hover{transform:translateY(-2px); box-shadow:0 18px 32px -8px rgba(30,91,255,.65);}
+  .trust-row{display:flex; gap:1.4rem; flex-wrap:wrap; margin-top:1.2rem; font-size:.85rem; color:#3C4A66; font-weight:600;}
+  .trust-row li{display:flex; align-items:center; gap:.4rem; list-style:none;}
+
+  .hero-art{position:relative; display:flex; justify-content:center;}
+  .hero-art svg{width:100%; max-width:380px; height:auto;}
+
+  /* ---------- Counter strip ---------- */
+  .counter-strip{
+    max-width:1120px; margin:0 auto; padding:0 1.5rem 2.6rem;
+  }
+  .counter-card{
+    background:var(--navy); color:#fff; border-radius:20px;
+    padding:1.8rem 2rem; display:flex; align-items:center; justify-content:space-between;
+    flex-wrap:wrap; gap:1.2rem;
+  }
+  .counter-card .num{font-family:'JetBrains Mono',monospace; font-size:2.2rem; font-weight:700; color:var(--gold);}
+  .counter-card .label{font-size:.85rem; color:#B9C4DD;}
+  .progress-track{flex:1; min-width:180px; height:8px; background:rgba(255,255,255,.14); border-radius:99px; overflow:hidden;}
+  .progress-fill{height:100%; width:62%; background:linear-gradient(90deg,var(--blue),var(--gold)); border-radius:99px;}
+
+  /* ---------- Testimonials ---------- */
+  .section{max-width:1120px; margin:0 auto; padding:1rem 1.5rem 3.2rem;}
+  .section h2{font-size:1.7rem; margin-bottom:1.6rem;}
+  .cards{display:grid; grid-template-columns:repeat(3,1fr); gap:1.2rem;}
+  .card{
+    background:#fff; border:1px solid var(--line); border-radius:16px; padding:1.4rem;
+  }
+  .stars{color:var(--gold); font-size:.95rem; margin-bottom:.6rem;}
+  .card p{font-size:.92rem; color:#384259; margin:0 0 1rem;}
+  .reviewer{display:flex; align-items:center; gap:.6rem;}
+  .avatar{
+    width:34px; height:34px; border-radius:50%; background:var(--blue-light);
+    color:var(--blue); display:flex; align-items:center; justify-content:center;
+    font-weight:700; font-size:.85rem;
+  }
+  .reviewer .name{font-weight:700; font-size:.88rem;}
+  .reviewer .when{font-size:.76rem; color:#8190AC;}
+
+  /* ---------- How it works ---------- */
+  .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:1.2rem;}
+  .step{background:#fff; border:1px solid var(--line); border-radius:16px; padding:1.4rem;}
+  .step .n{
+    font-family:'JetBrains Mono',monospace; font-weight:700; color:var(--blue);
+    font-size:.85rem; margin-bottom:.5rem; display:block;
+  }
+  .step h3{font-size:1rem; margin-bottom:.4rem;}
+  .step p{font-size:.88rem; color:#5B6883; margin:0;}
+
+  .bottom-cta{text-align:center; padding:1rem 1.5rem 3.4rem;}
+  .bottom-cta p{color:#5B6883; margin:.8rem 0 0; font-size:.85rem;}
+
+  /* ---------- Footer / disclosure ---------- */
+  footer{
+    border-top:1px solid var(--line); padding:2.2rem 1.5rem 3rem;
+  }
+  .disclosure{
+    max-width:760px; margin:0 auto; background:var(--blue-light); border-radius:16px;
+    padding:1.4rem 1.6rem; font-size:.85rem; color:#2A3650;
+  }
+  .disclosure strong{color:var(--navy);}
+  .footer-fine{max-width:1120px; margin:1.4rem auto 0; font-size:.76rem; color:#9AA6C0; text-align:center;}
+
+  /* ---------- Toasts ---------- */
+  #toast-wrap{
+    position:fixed; left:1rem; bottom:1rem; z-index:90;
+    display:flex; flex-direction:column; gap:.6rem; pointer-events:none;
+  }
+  .toast{
+    background:#fff; border:1px solid var(--line); border-radius:12px;
+    padding:.7rem 1rem; box-shadow:var(--shadow); font-size:.82rem; font-weight:600;
+    display:flex; align-items:center; gap:.55rem; min-width:220px;
+    transform:translateX(-120%); transition:transform .35s ease;
+  }
+  .toast.show{transform:translateX(0);}
+  .toast .check{color:var(--green); font-size:1rem;}
+
+  @media (max-width:880px){
+    .hero{grid-template-columns:1fr; gap:1.6rem; padding-top:1.6rem;}
+    .hero-art{order:-1;}
+    .hero-art svg{max-width:240px;}
+    .cards{grid-template-columns:1fr;}
+    .steps{grid-template-columns:1fr;}
+    .counter-card{flex-direction:column; align-items:flex-start;}
+  }
+</style>
+</head>
+<body>
+
+  <div class="demo-bar">
+    🎓 <strong>EDUCATIONAL DEMO</strong> — this is a simulated scam page made for a YouTube video. Nothing here is real, no data is collected. <a href="#disclosure">What's this?</a>
+  </div>
+
+  <header class="nav">
+    <svg class="logo-mark" viewBox="0 0 40 40" fill="none">
+      <rect width="40" height="40" rx="10" fill="#1E5BFF"/>
+      <path d="M11 23c5-6 13-6 18 0" stroke="white" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+      <path d="M14.5 19c3.6-4 7.4-4 11 0" stroke="white" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+      <circle cx="20" cy="27" r="2.1" fill="#FFB400"/>
+    </svg>
+    <span class="logo-text">Net<span>Gift</span></span>
+  </header>
+
+  <section class="hero">
+    <div>
+      <span class="eyebrow">🎉 DIGITAL SRI LANKA WEEK · ALL NETWORKS</span>
+      <h1>Claim your <span class="accent">free 100GB</span> data, on us.</h1>
+      <p class="sub">To celebrate 2 million members joining the NetGift community, we're giving away free mobile data to people across Sri Lanka — no purchase, no SIM swap, works on any device.</p>
+
+      <div class="countdown">
+        <span class="dot"></span> Offer ends in <span id="timer" class="mono">04:58:12</span>
+      </div>
+      <br>
+      <a class="cta-btn" href="2-verify.html">Claim My Free 100GB →</a>
+
+      <ul class="trust-row">
+        <li>✅ 100% Free</li>
+        <li>✅ No Card Required</li>
+        <li>✅ Works on Any Network</li>
+      </ul>
+    </div>
+
+    <div class="hero-art">
+      <svg viewBox="0 0 360 360" fill="none">
+        <circle cx="180" cy="180" r="170" fill="#EAF1FF"/>
+        <rect x="120" y="60" width="120" height="220" rx="22" fill="#0B1D3A"/>
+        <rect x="132" y="84" width="96" height="150" rx="8" fill="#1E5BFF"/>
+        <circle cx="180" cy="250" r="9" fill="#fff"/>
+        <path d="M152 140c16-16 40-16 56 0" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+        <path d="M162 154c10-9 26-9 36 0" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+        <circle cx="180" cy="168" r="4.5" fill="#FFB400"/>
+        <circle cx="270" cy="100" r="34" fill="#FFB400"/>
+        <text x="270" y="108" text-anchor="middle" font-family="Plus Jakarta Sans" font-weight="800" font-size="22" fill="#0B1D3A">GB</text>
+        <circle cx="80" cy="260" r="20" fill="#1DB876"/>
+        <path d="M71 260l6 6 12-13" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+    </div>
+  </section>
+
+  <section class="counter-strip">
+    <div class="counter-card">
+      <div>
+        <div class="num" id="counter">14,382</div>
+        <div class="label">people already claimed their free data today</div>
+      </div>
+      <div class="progress-track"><div class="progress-fill"></div></div>
+      <div class="label" style="white-space:nowrap;">62% of today's 25,000 GB pool claimed</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>What people are saying</h2>
+    <div class="cards">
+      <div class="card">
+        <div class="stars">★★★★★</div>
+        <p>"Honestly didn't think this was real but I got my data in like 2 minutes. So easy."</p>
+        <div class="reviewer">
+          <div class="avatar">K</div>
+          <div><div class="name">Kasun</div><div class="when">Colombo · 2 hours ago</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="stars">★★★★★</div>
+        <p>"Shared it with my whole family group, everyone got theirs too. No tricks."</p>
+        <div class="reviewer">
+          <div class="avatar">N</div>
+          <div><div class="name">Nadeesha</div><div class="when">Kandy · 5 hours ago</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="stars">★★★★★</div>
+        <p>"Was skeptical at first but it worked exactly as it said. Claimed before the timer ran out!"</p>
+        <div class="reviewer">
+          <div class="avatar">T</div>
+          <div><div class="name">Tharindu</div><div class="when">Galle · 1 day ago</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0;">
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step"><span class="n">01</span><h3>Tap claim</h3><p>Start your claim with the button above. Takes a few seconds.</p></div>
+      <div class="step"><span class="n">02</span><h3>Quick verification</h3><p>We confirm your number works with the offer.</p></div>
+      <div class="step"><span class="n">03</span><h3>Data added</h3><p>Your 100GB is reserved and ready to use instantly.</p></div>
+    </div>
+  </section>
+
+  <div class="bottom-cta">
+    <a class="cta-btn" href="2-verify.html">Claim My Free 100GB →</a>
+    <p>Limited to the first 25,000 GB claimed today.</p>
+  </div>
+
+  <footer id="disclosure">
+    <div class="disclosure">
+      <strong>What is this, really?</strong> This page recreates the visual tactics used in real online scams — the countdown timer, the "people just claimed this" counter, the reviews, the universal "works on any network" wording — for an educational video about spotting scams. <strong>NetGift is not a real company, no data is collected, and nothing here can actually give you free mobile data.</strong>
+    </div>
+    <p class="footer-fine">Educational demo · not affiliated with any telecom operator</p>
+  </footer>
+
+  <div id="toast-wrap"></div>
+
+  <script>
+    // Countdown timer — just for visual effect, resets if it hits zero.
+    let t = 4*3600 + 58*60 + 12;
+    setInterval(()=>{
+      t = t>0 ? t-1 : 5*3600;
+      const h=String(Math.floor(t/3600)).padStart(2,'0');
+      const m=String(Math.floor((t%3600)/60)).padStart(2,'0');
+      const s=String(t%60).padStart(2,'0');
+      document.getElementById('timer').textContent = `${h}:${m}:${s}`;
+    },1000);
+
+    // Live counter — ticks up slowly.
+    let count = 14382;
+    const counterEl = document.getElementById('counter');
+    setInterval(()=>{
+      count += Math.floor(Math.random()*3)+1;
+      counterEl.textContent = count.toLocaleString();
+    }, 2600);
+
+    // Toast popups — capped at 4, spaced out, never stacking more than 2.
+    const names = ['Sanduni','Ishara','Dilshan','Hasini','Ravindu'];
+    let shown = 0, MAX_TOASTS = 4;
+    function spawnToast(){
+      if(shown >= MAX_TOASTS) return;
+      shown++;
+      const name = names[Math.floor(Math.random()*names.length)];
+      const wrap = document.getElementById('toast-wrap');
+      const el = document.createElement('div');
+      el.className = 'toast';
+      el.innerHTML = `<span class="check">✓</span> <span>${name} just claimed 100GB</span>`;
+      wrap.appendChild(el);
+      requestAnimationFrame(()=>el.classList.add('show'));
+      setTimeout(()=>{
+        el.classList.remove('show');
+        setTimeout(()=>el.remove(),400);
+      },4200);
+      // keep at most 2 stacked at once
+      while(wrap.children.length > 2){ wrap.removeChild(wrap.firstChild); }
+    }
+    setTimeout(()=>{ spawnToast(); }, 3500);
+    setTimeout(()=>{ spawnToast(); }, 9000);
+    setTimeout(()=>{ spawnToast(); }, 16000);
+    setTimeout(()=>{ spawnToast(); }, 24000);
+  </script>
+</body>
+</html>

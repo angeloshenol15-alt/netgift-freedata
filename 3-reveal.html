@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NetGift — Actually, This Was a Demo</title>
+<!--
+  ANGELO — page 3 of 3 ("the reveal"). This is the honest layer, no more fake claims here.
+  Search for "EDIT: NGL LINK" below and put your real ngl.link URL in that href.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0B1D3A; --blue:#1E5BFF; --blue-light:#EAF1FF;
+    --gold:#FFB400; --green:#1DB876; --paper:#F6F8FC;
+    --ink:#16181D; --coral:#FF5630; --line:#E3E9F5;
+    --shadow:0 20px 40px -20px rgba(11,29,58,.25);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--paper); color:var(--navy);
+    font-family:'Inter',system-ui,sans-serif; line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  h1,h2,h3{font-family:'Plus Jakarta Sans',sans-serif; margin:0; letter-spacing:-0.02em;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  :focus-visible{outline:3px solid var(--blue); outline-offset:2px;}
+
+  .demo-bar{
+    position:sticky; top:0; z-index:100;
+    background:var(--ink); color:#fff;
+    font-family:'JetBrains Mono',monospace;
+    font-size:.78rem; font-weight:500;
+    padding:.6rem 1rem; text-align:center;
+    border-bottom:2px solid var(--coral);
+  }
+  .demo-bar strong{color:var(--coral); font-weight:700;}
+
+  .wrap{max-width:880px; margin:0 auto; padding:0 1.5rem;}
+
+  /* ---------- Reveal hero ---------- */
+  .reveal-hero{padding:3.4rem 0 2.4rem; text-align:center;}
+  .stage{position:relative; min-height:180px;}
+  .fake-line{
+    font-size:clamp(1.8rem,4.5vw,2.6rem); font-weight:800;
+    transition:opacity .5s ease, transform .5s ease;
+  }
+  .fake-line.out{opacity:0; transform:translateY(-8px) scale(.96); position:absolute; inset:0;}
+  .truth-wrap{opacity:0; transform:scale(.92); transition:opacity .5s ease, transform .5s ease;}
+  .truth-wrap.in{opacity:1; transform:scale(1);}
+  .stamp{
+    display:inline-block; font-family:'JetBrains Mono',monospace; font-weight:700;
+    font-size:.78rem; letter-spacing:.08em; color:var(--coral);
+    border:2.5px solid var(--coral); border-radius:8px; padding:.3rem .8rem;
+    transform:rotate(-3deg); margin-bottom:1rem;
+  }
+  .truth-line{
+    font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; color:var(--ink);
+    font-size:clamp(2.2rem,7vw,3.7rem); line-height:1.04; margin:0;
+  }
+  .truth-line .hot{color:var(--coral);}
+  .truth-sub{
+    max-width:560px; margin:1.1rem auto 0; color:#3C4A66; font-size:1.05rem;
+  }
+
+  /* ---------- Tactics grid ---------- */
+  .section{padding:1.4rem 0 3rem;}
+  .section h2{font-size:1.5rem; margin-bottom:.4rem;}
+  .section .lead{color:#5B6883; font-size:.95rem; margin-bottom:1.6rem; max-width:620px;}
+  .grid{display:grid; grid-template-columns:repeat(2,1fr); gap:1rem;}
+  .tactic{
+    background:#fff; border:1px solid var(--line); border-radius:16px; padding:1.3rem 1.4rem;
+  }
+  .tactic .tag{
+    font-family:'JetBrains Mono',monospace; font-size:.72rem; font-weight:700;
+    color:var(--coral); text-transform:uppercase; letter-spacing:.04em;
+  }
+  .tactic h3{font-size:1rem; margin:.35rem 0 .45rem;}
+  .tactic p{font-size:.86rem; color:#4A5673; margin:0;}
+
+  /* ---------- Tips ---------- */
+  .tips{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:.8rem;}
+  .tips li{
+    display:flex; gap:.7rem; align-items:flex-start; background:#fff; border:1px solid var(--line);
+    border-radius:14px; padding:.9rem 1.1rem; font-size:.9rem;
+  }
+  .tips li .ico{
+    width:26px; height:26px; border-radius:50%; background:var(--blue-light); color:var(--blue);
+    display:flex; align-items:center; justify-content:center; font-size:.85rem; flex-shrink:0; font-weight:700;
+  }
+
+  /* ---------- NGL CTA ---------- */
+  .feedback{
+    background:var(--navy); color:#fff; border-radius:22px; padding:2.4rem 2rem;
+    text-align:center; margin:1rem 0 3rem;
+  }
+  .feedback h2{color:#fff; font-size:1.5rem; margin-bottom:.5rem;}
+  .feedback p{color:#B9C4DD; font-size:.92rem; max-width:480px; margin:0 auto 1.4rem;}
+  .ngl-btn{
+    display:inline-flex; align-items:center; gap:.55rem;
+    background:var(--gold); color:var(--navy); font-weight:700; font-size:1.02rem;
+    padding:1rem 1.8rem; border-radius:14px; text-decoration:none;
+    box-shadow:0 14px 28px -10px rgba(255,180,0,.4);
+    transition:transform .15s ease;
+  }
+  .ngl-btn:hover{transform:translateY(-2px);}
+
+  footer{padding:0 0 3rem;}
+  .disclosure{
+    background:var(--blue-light); border-radius:14px; padding:1.1rem 1.3rem; font-size:.82rem; color:#2A3650;
+  }
+
+  @media (max-width:680px){
+    .grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+  <div class="demo-bar">
+    🎓 <strong>EDUCATIONAL DEMO</strong> — this whole site was a simulated scam built for a YouTube video.
+  </div>
+
+  <div class="wrap">
+
+    <section class="reveal-hero">
+      <div class="stage">
+        <div class="fake-line" id="fakeLine">🎉 Congratulations, your 100GB is on its way!</div>
+        <div class="truth-wrap" id="truthWrap">
+          <span class="stamp">🎓 EDUCATIONAL DEMO</span>
+          <h1 class="truth-line">YOU JUST GOT <span class="hot">SCAMMED.</span></h1>
+          <p class="truth-sub">Relax — it was me, not a real scammer. There is no NetGift, no 100GB, and nothing was ever sent to your number. Everything you just clicked through was built to show you exactly how real scam pages work.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="feedback">
+      <h2>Got thoughts on this video?</h2>
+      <p>Send me anything, anonymously — what worked, what felt too real, what you'd warn a friend about.</p>
+      <!-- EDIT: NGL LINK — replace the href below with your real ngl.link URL -->
+      <a class="ngl-btn" href="https://ngl.link/shenolx" target="_blank" rel="noopener">Send Anonymous Feedback →</a>
+    </section>
+
+    <section class="section">
+      <h2>Every trick you just experienced</h2>
+      <p class="lead">None of this was random — each piece exists because it makes people act before they think. Here's exactly what was working on you, page by page.</p>
+      <div class="grid">
+        <div class="tactic">
+          <span class="tag">Page 1</span>
+          <h3>Countdown timer</h3>
+          <p>Creates artificial urgency so you decide fast instead of carefully. Real offers rarely vanish in 5 hours.</p>
+        </div>
+        <div class="tactic">
+          <span class="tag">Page 1</span>
+          <h3>Live claim counter</h3>
+          <p>A number that "ticks up" makes an offer feel popular and real, even though it's just a script.</p>
+        </div>
+        <div class="tactic">
+          <span class="tag">Page 1</span>
+          <h3>Fake reviews</h3>
+          <p>Names, stars, and "2 hours ago" timestamps borrow the trust people give to real customer reviews.</p>
+        </div>
+        <div class="tactic">
+          <span class="tag">Page 1</span>
+          <h3>"Works on any network"</h3>
+          <p>Vague universal claims let a scam avoid naming (and being checked against) one real company.</p>
+        </div>
+        <div class="tactic">
+          <span class="tag">Page 2</span>
+          <h3>Verification theater</h3>
+          <p>A spinner and checklist that "confirm" things make a fake process feel technical and legitimate.</p>
+        </div>
+        <div class="tactic">
+          <span class="tag">Pages 1 &amp; 2</span>
+          <h3>Pop-up social proof</h3>
+          <p>"Kasun just claimed 100GB" notifications are designed to make you feel like you're the last one missing out.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0;">
+      <h2>How to actually spot this</h2>
+      <ul class="tips">
+        <li><span class="ico">1</span> If a "free offer" has a countdown timer, slow down — urgency is the tactic, not the deadline.</li>
+        <li><span class="ico">2</span> Check the actual web address. Real offers come from a company's real domain, not a random link shared in a group chat.</li>
+        <li><span class="ico">3</span> Never enter your phone number, OTP, or card details to "claim" something you didn't request.</li>
+        <li><span class="ico">4</span> If you're unsure, go to the company's official app or website directly and check there — don't follow the link.</li>
+        <li><span class="ico">5</span> Tell the person who shared it with you. Most people share these because they got fooled too, not because they meant harm.</li>
+      </ul>
+    </section>
+
+    <footer>
+      <div class="disclosure">
+        This entire site (this page included) was built for an educational YouTube video about recognizing online scams. NetGift is not a real company or offer, no personal data was ever collected, and no real telecom operator is affiliated with this project.
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    setTimeout(()=>{
+      document.getElementById('fakeLine').classList.add('out');
+      document.getElementById('truthWrap').classList.add('in');
+    }, 1100);
+  </script>
+</body>
+</html>
